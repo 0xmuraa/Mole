@@ -1,0 +1,132 @@
+.section {
+  background: var(--bg-secondary);
+  padding: 88px 0;
+}
+
+.head {
+  max-width: 60ch;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.headline {
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 900px) {
+  .flow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+
+.flow > .stage:not(:last-child) {
+  border-bottom: none;
+}
+
+@media (min-width: 900px) {
+  .flow > .stage:not(:last-child) {
+    border-bottom: 1px solid var(--panel-border);
+    border-right: none;
+  }
+
+  .flow > .stage {
+    border-right: 1px solid var(--panel-border);
+  }
+}
+
+.stage:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.stage:last-child {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+@media (min-width: 900px) {
+  .stage:first-child {
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  .stage:last-child {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+}
+
+.arrow {
+  position: absolute;
+  right: -13px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--panel-border);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+@media (min-width: 900px) {
+  .arrow {
+    display: flex;
+  }
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+
+.desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
