@@ -1,11 +1,9 @@
 # Assets
 
-This directory will hold MOLE's visual assets.
+This directory holds HYPERMOLE's visual assets.
 
-## Expected future assets
+- `mole-mascot.png` — the primary pixel-art mole mascot. Used across the homepage (seismic core badge, footer).
+- `mole-avatar.png` — cropped/square version, used in the navbar and footer, and as the site icon.
+- `mole-hero.png` — a wide cover asset created for the original MOLE ("Underground Intelligence") direction. It isn't used on the current HYPERMOLE homepage, since its brown cavern artwork doesn't fit the new black/cyan/amber interface — it's kept here as a historical/social asset until a HYPERMOLE-specific cover is made.
 
-- `mole-mascot.png` — the primary pixel-art mole mascot
-- `mole-avatar.png` — cropped/square version for avatars and profile use
-- `mole-hero.png` — larger hero/banner version for the website
-
-No image files exist here yet. A preferred pixel mole visual has already been chosen and will be added manually once finalized. See [../../docs/VISUAL_LANGUAGE.md](../../docs/VISUAL_LANGUAGE.md) for the design direction these assets should follow.
+See [../../docs/VISUAL_LANGUAGE.md](../../docs/VISUAL_LANGUAGE.md) for the current design direction.

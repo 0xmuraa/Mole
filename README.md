@@ -1,58 +1,57 @@
-# MOLE
+# HYPERMOLE
 
-Underground Intelligence for Robinhood Chain.
+Onchain Seismic Radar for Robinhood Chain.
 
-> Everyone watches the surface.
-> MOLE watches what moves underneath.
+> See what moves before the market does.
 
-MOLE maps public onchain activity into an underground visual system. Wallet movements, capital flows, and relationships are represented as tunnels and burrows instead of raw tables and charts, so what is happening beneath the surface is easy to see and easy to follow.
+HYPERMOLE maps public onchain activity into a seismic system. Wallet activity, funding routes and emerging convergence are represented as tremors, epicenters and magnitude instead of raw tables and charts, so unusual movement is easy to spot before it becomes obvious on the surface.
 
-## What is MOLE?
+## What is HYPERMOLE?
 
-MOLE is an underground intelligence tool for Robinhood Chain. It observes public onchain activity and turns it into a visual map of what is moving, who is connected, and where capital is going before that activity becomes obvious on the surface.
+HYPERMOLE is an onchain seismic radar for Robinhood Chain. It watches public onchain activity and turns it into a readable map of where independent wallets are converging, which wallets are waking up, and where capital is moving — before that activity becomes visible in price.
 
 ## Core idea
 
-Most people only notice a token once its activity is already visible on the surface: price charts, trending lists, social mentions. MOLE is built to organize what is happening underneath that surface — wallet movements, funding relationships, fresh participants, and unusual onchain activity — and present it as a readable underground map.
+Normal traders usually notice market activity after it starts happening. HYPERMOLE focuses on the activity underneath: wallets becoming active, several independent wallets converging on the same entity, capital arriving from different funding routes, dormant wallets waking up, and clusters changing direction.
+
+The metaphor: onchain movement is seismic movement. When unusual activity starts forming, HYPERMOLE detects a **tremor**. The place it's converging on becomes the **epicenter**. The strength of that activity is its **magnitude**. How much independent activity is meeting in one place is its **convergence**.
 
 ## Product vocabulary
 
 | Term | Meaning |
 |---|---|
-| **Fresh Dirt** | Newly detected activity |
-| **Tunnels** | Connections or movement between wallets |
-| **Burrows** | Related wallet clusters |
-| **MOLE Signal** | Noteworthy detected activity |
-| **MOLE Score** | A future signal/confidence visualization |
-| **Surface** | Visible market activity |
-| **Underground** | Underlying wallet/onchain activity |
+| **Tremor** | An unusual concentration or acceleration of public onchain activity |
+| **Epicenter** | The entity / contract / cluster around which activity is converging |
+| **Magnitude** | A visual measure of the strength of detected activity |
+| **Convergence** | How strongly independent activity is meeting around the same entity |
+| **Wake** | A previously inactive wallet or cluster becoming active again |
+| **Aftershock** | Follow-on activity appearing after an earlier tremor |
+| **Trace** | A mapped relationship or funding path |
+| **Flow** | Movement of capital or activity between regions |
 
 ## Planned product
 
 - Homepage
-- Underground Terminal
-- Fresh Dirt / Pulse
-- Tunnel Inspector
-- Burrows
-- MOLE Signals
-- Surface Receipts
+- Underground / Seismic Terminal
+- Tremor feed
+- Epicenter explorer
+- Public chain log & audit views
 - Docs
 
-These are planned modules. None of them are built yet.
+These are planned modules. Only the homepage below is built.
 
-## Homepage (v1)
+## Homepage (v2)
 
-The homepage is implemented as a Next.js app and includes:
+The homepage is a Next.js app and includes:
 
-- A hero section with an animated, interactive underground network preview (the mini terminal), built with SVG and CSS — not a screenshot.
-- Four working preview actions in the mini terminal: `DIG`, `TRACE`, `BURROWS`, `RESET`.
-- A "How MOLE Works" flow (Dig → Trace → Connect → Surface).
-- A Fresh Dirt preview table and a Burrows preview with mini cluster graphs.
-- A larger Underground Terminal layout teaser (dossier / network / surface / logs / audit panels).
+- A hero section with an animated, self-scanning seismic radar preview (`SeismicRadar` + `SeismicNetwork`), built with SVG and CSS — not a screenshot.
+- A "How HYPERMOLE Works" flow (Monitor → Trace → Detect → Surface).
+- A Tremors table and an Epicenters section with mini convergence graphs.
+- A full Seismic Observatory terminal showcase: a 20-node, four-region network (Fresh Wallets / Smart Clusters / Funding / Contracts) driven by a small frontend simulation engine that fires coordinated `WAKE`, `TRACE`, `FLOW`, `TREMOR`, `CONVERGENCE`, `EPICENTER` and `AFTERSHOCK` events — each event updates the network, the chart, the metrics and both log feeds together, on independently randomized intervals so it never repeats on a fixed beat.
 - An Open Source section linking to this repository.
 - A Token Status section driven entirely by `src/config/project.ts` — it will not show a contract address, buy link, or any token figures until that config is switched on.
 
-All numbers, wallet identifiers, feed events, and scores shown on the homepage are demo/illustrative data (see `src/data/demo.ts`), clearly labeled as such in the UI (`DEMO MODE`, `DEMO DATA`, `ILLUSTRATIVE FEED`). None of it reflects real Robinhood Chain activity. Nothing on the site claims live user counts, wallet counts, trading results, P&L, historical performance, or partnerships.
+All numbers, wallet identifiers, feed events, magnitudes and scores shown on the homepage are demo/simulation data (see `src/data/seismic.ts`), clearly labeled in the UI (`DEMO MODE`, `DEMO DATA`, `SIMULATION`, `ILLUSTRATIVE`). None of it reflects real Robinhood Chain activity. Nothing on the site claims live user counts, wallet counts, trading results, P&L, historical performance, or partnerships.
 
 Not built yet: the standalone `/terminal` product, real public-chain data integration, and token integration.
 
@@ -94,14 +93,17 @@ mole/
 │       └── mole-hero.png
 └── src/
     ├── app/            # Next.js App Router: layout, homepage, global styles
-    ├── components/      # Homepage sections (Navbar, Hero, MoleTerminalPreview, ...)
+    ├── components/      # Homepage sections (Navbar, Hero, SeismicNetwork, SeismicTerminal, ...)
     ├── config/          # Central project config — including the token-live switch
-    └── data/            # Demo/illustrative data used by the homepage previews
+    ├── data/            # Demo/simulation data used by the homepage previews
+    └── lib/             # Small shared helpers (e.g. tunnel path math)
 ```
 
 ## Status
 
-Early development. The v1 homepage above is implemented. The terminal product, live data layer, and token integration are not.
+Early development. The v2 homepage above is implemented. The terminal product, live data layer, and token integration are not.
+
+This project began under the name MOLE / "Underground Intelligence." It has since been repositioned as **HYPERMOLE**, an onchain seismic radar, with a simplified vocabulary and a denser, more active terminal. The original pixel-art mole mascot carries over unchanged.
 
 ## Links
 
@@ -114,10 +116,10 @@ Early development. The v1 homepage above is implemented. The terminal product, l
 
 01. Brand + mascot
 02. Product website
-03. Underground terminal
+03. Seismic terminal
 04. Public-chain data layer
-05. Pulse / Fresh Dirt
-06. Burrow explorer
+05. Tremor feed
+06. Epicenter explorer
 07. Documentation
 08. Token integration
 

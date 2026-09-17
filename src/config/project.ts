@@ -39,15 +39,15 @@ export type NavLink = {
 // the real docs folder on GitHub. None of these are placeholder/dead links.
 export const navLinks: NavLink[] = [
   { label: "TERMINAL", href: "#terminal" },
-  { label: "PULSE", href: "#fresh-dirt" },
+  { label: "TREMORS", href: "#tremors" },
   { label: "HOW IT WORKS", href: "#how-it-works" },
-  { label: "BURROWS", href: "#burrows" },
+  { label: "MAP", href: "#map" },
   { label: "DOCS", href: "https://github.com/0xmuraa/Mole/tree/main/docs", external: true },
 ];
 
 export const site = {
-  name: "MOLE",
-  tagline: "Underground Intelligence for Robinhood Chain",
+  name: "HYPERMOLE",
+  tagline: "Onchain Seismic Radar for Robinhood Chain",
   chain: "RH CHAIN",
   repo: "https://github.com/0xmuraa/Mole",
 };

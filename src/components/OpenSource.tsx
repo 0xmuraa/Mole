@@ -10,11 +10,11 @@ export default function OpenSource() {
           <h2 className={styles.headline}>
             READ THE CODE.
             <br />
-            FOLLOW THE TUNNELS.
+            WATCH THE SYSTEM EVOLVE.
           </h2>
           <p className={styles.sub}>
-            MOLE is being built in public. The repository contains the product concept, visual
-            language, roadmap and implementation as it grows.
+            HYPERMOLE is being built in public. The repository contains the product concept,
+            visual language, roadmap and implementation as it grows.
           </p>
           <div className={styles.actions}>
             <a

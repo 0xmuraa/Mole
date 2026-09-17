@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MOLE — Underground Intelligence for Robinhood Chain",
+  title: "HYPERMOLE — Onchain Seismic Radar for Robinhood Chain",
   description:
-    "MOLE maps wallet activity, funding paths and onchain relationships beneath Robinhood Chain into a readable underground network.",
+    "HYPERMOLE maps wallet activity, funding paths and emerging convergence across Robinhood Chain before it becomes obvious on the surface.",
   icons: {
     icon: "/assets/mole-avatar.png",
   },

@@ -14,14 +14,14 @@ export default function Navbar() {
         <a href="#top" className={styles.brand} onClick={() => setOpen(false)}>
           <Image
             src="/assets/mole-avatar.png"
-            alt="MOLE"
+            alt="HYPERMOLE"
             width={30}
             height={30}
             className={`${styles.avatar} pixelSharp`}
           />
           <span className={styles.brandText}>
             <span className={styles.wordmark}>{site.name}</span>
-            <span className={`${styles.subline} mono`}>UNDERGROUND INTELLIGENCE</span>
+            <span className={`${styles.subline} mono`}>ONCHAIN SEISMIC RADAR</span>
           </span>
         </a>
 

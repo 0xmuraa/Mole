@@ -10,7 +10,7 @@ export default function Footer() {
           <div className={styles.brand}>
             <Image
               src="/assets/mole-avatar.png"
-              alt="MOLE"
+              alt="HYPERMOLE"
               width={28}
               height={28}
               className={`${styles.avatar} pixelSharp`}
@@ -50,7 +50,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <span className={styles.bottomLine}>BUILT BELOW THE SURFACE.</span>
+          <span className={styles.bottomLine}>MOVEMENT STARTS BELOW THE SURFACE.</span>
           <span className={styles.stage}>EARLY DEVELOPMENT</span>
         </div>
       </div>

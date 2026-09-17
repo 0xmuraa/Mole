@@ -1,16 +1,21 @@
 :root {
-  --bg: #080706;
-  --bg-secondary: #0d0b08;
-  --panel: #11100d;
-  --panel-border: #241a10;
-  --earth: #241a10;
-  --earth-light: #3a2817;
-  --amber: #f0a43a;
-  --gold: #ffd27a;
-  --cream: #e8dfc9;
-  --muted: #8f8777;
-  --danger: #c1503a;
-  --status-green: #5fa876;
+  /* HYPERMOLE V2 — black intelligence terminal + amber identity + cyan seismic data.
+     Brown is now a supporting color (mascot, faint depth), not a UI-dominant one. */
+  --bg: #050505;
+  --bg-secondary: #090909;
+  --panel: #0d0d0c;
+  --panel-elevated: #121210;
+  --panel-border: #25231e;
+  --earth: #352315;
+  --earth-light: #4a3220;
+  --amber: #f2a63b;
+  --gold: #ffd36a;
+  --cyan: #4fd9eb;
+  --cyan-deep: #167a8a;
+  --cream: #f1eee7;
+  --muted: #88857c;
+  --danger: #d9604c;
+  --status-green: #76c96b;
 
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
@@ -76,6 +81,14 @@ p {
 
 .pixelSharp {
   image-rendering: pixelated;
+}
+
+/* Sticky nav is 68px tall — leave room so anchor-jumps don't clip section headings. */
+#how-it-works,
+#tremors,
+#map,
+#terminal {
+  scroll-margin-top: 84px;
 }
 
 @media (prefers-reduced-motion: reduce) {

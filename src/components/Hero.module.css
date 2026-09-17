@@ -81,10 +81,7 @@
 }
 
 .headlineAccent {
-  background: linear-gradient(90deg, var(--amber), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--cyan);
 }
 
 .sub {

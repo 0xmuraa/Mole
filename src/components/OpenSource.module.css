@@ -4,7 +4,8 @@
 }
 
 .panel {
-  background: linear-gradient(135deg, var(--earth) 0%, var(--panel) 60%);
+  background: var(--panel-elevated);
+  background-image: radial-gradient(ellipse 55% 70% at 100% 0%, rgba(242, 166, 59, 0.09), transparent 60%);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
   padding: 48px 40px;

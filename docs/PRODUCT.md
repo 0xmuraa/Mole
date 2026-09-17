@@ -1,30 +1,30 @@
 # PRODUCT
 
-MOLE's planned product is organized into modules. All modules below are planned, not built.
+HYPERMOLE's planned product is organized into modules. All modules below are planned, not built — the homepage previews several of them.
 
 ## 1. Homepage
 
-Introduces the MOLE concept, the underground metaphor, and links into the rest of the product.
+Introduces HYPERMOLE, the seismic metaphor, and links into the rest of the product.
 
-## 2. Underground Terminal
+## 2. Seismic Terminal
 
-The main working surface. A live view into wallet intelligence, the animated underground network, and surface activity, laid out so all three are visible at once. See [TERMINAL.md](./TERMINAL.md).
+The main working surface. A live view into an entity's dossier, the animated seismic network, and surface activity, laid out so all three are visible at once. See [TERMINAL.md](./TERMINAL.md).
 
-## 3. Fresh Dirt / Pulse
+## 3. Tremors
 
-A feed of newly detected activity. Surfaces new wallets, new movement, and new clusters as they're picked up.
+A feed of newly detected activity: wallets waking, convergence building, aftershocks following earlier tremors.
 
-## 4. Tunnel Inspector
+## 4. Trace Inspector
 
 A focused view for tracing a single connection between wallets: the funding path, the timing, and the size of the movement.
 
-## 5. Burrows
+## 5. Epicenters
 
-A view into related wallet clusters. Groups wallets that behave like they belong to the same actor or coordinated group.
+A view into where independent activity is converging. Groups wallets that behave like they're moving toward the same entity.
 
-## 6. MOLE Signals
+## 6. HYPERMOLE Signals
 
-Noteworthy detected activity, flagged and explained. The future home of MOLE Score, a confidence/signal visualization.
+Noteworthy detected activity, flagged and explained. The future home of Tremor Score, a confidence/signal visualization.
 
 ## 7. Surface Receipts
 
@@ -32,4 +32,4 @@ Ties underground activity back to what actually became visible on the surface, s
 
 ## 8. Docs
 
-Documentation for the product, its vocabulary, and how to read what MOLE shows.
+Documentation for the product, its vocabulary, and how to read what HYPERMOLE shows.

@@ -66,7 +66,7 @@
   color: var(--cream);
 }
 
-.activity {
+.status {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.08em;
@@ -76,23 +76,25 @@
   color: var(--muted);
 }
 
-.activityLOW {
+.statusBUILDING {
+  color: var(--cyan);
+  border-color: rgba(79, 217, 235, 0.3);
+  background: rgba(79, 217, 235, 0.06);
+}
+
+.statusACTIVE {
+  color: var(--gold);
+  border-color: rgba(255, 211, 106, 0.32);
+  background: rgba(255, 211, 106, 0.08);
+}
+
+.statusCOOLING {
   color: var(--muted);
-}
-
-.activityMODERATE {
-  color: var(--amber);
-  border-color: rgba(240, 164, 58, 0.3);
-}
-
-.activityELEVATED {
-  color: var(--danger);
-  border-color: rgba(193, 80, 58, 0.35);
 }
 
 .graphWrap {
   background: var(--bg);
-  border: 1px solid rgba(240, 164, 58, 0.08);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-md);
   aspect-ratio: 16 / 10;
 }
@@ -103,13 +105,19 @@
 }
 
 .graphNode {
-  fill: var(--earth);
-  stroke: var(--amber);
+  fill: var(--panel-elevated);
+  stroke: var(--cyan);
   stroke-width: 1;
 }
 
+.graphNodeCore {
+  fill: var(--panel-elevated);
+  stroke: var(--gold);
+  stroke-width: 1.2;
+}
+
 .graphEdge {
-  stroke: var(--earth-light);
+  stroke: var(--panel-border);
   stroke-width: 0.6;
   opacity: 0.9;
 }
@@ -137,30 +145,13 @@
   font-size: 14px;
   color: var(--cream);
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
-.ctaRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 40px;
+.statValueGold {
+  color: var(--gold);
 }
 
-.cta {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-sm);
-  padding: 12px 20px;
-  opacity: 0.7;
-}
-
-.comingSoon {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--amber);
+.statValueCyan {
+  color: var(--cyan);
 }

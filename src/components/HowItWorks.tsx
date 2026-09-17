@@ -1,10 +1,10 @@
 import styles from "./HowItWorks.module.css";
 
 const stages = [
-  { num: "01", title: "DIG", desc: "Watch public Robinhood Chain activity." },
-  { num: "02", title: "TRACE", desc: "Map movement and funding relationships." },
-  { num: "03", title: "CONNECT", desc: "Group related activity into tunnels and burrows." },
-  { num: "04", title: "SURFACE", desc: "Turn noteworthy patterns into readable MOLE signals." },
+  { num: "01", title: "MONITOR", desc: "Watch public chain activity." },
+  { num: "02", title: "TRACE", desc: "Map wallet and funding relationships." },
+  { num: "03", title: "DETECT", desc: "Measure acceleration and convergence." },
+  { num: "04", title: "SURFACE", desc: "Show tremors before activity becomes obvious." },
 ];
 
 export default function HowItWorks() {
@@ -13,8 +13,8 @@ export default function HowItWorks() {
       <div className="container">
         <div className={styles.head}>
           <span className={styles.eyebrow}>HOW IT WORKS</span>
-          <h2 className={styles.headline}>HOW MOLE WORKS</h2>
-          <p className={styles.sub}>Public activity goes in. An underground map comes out.</p>
+          <h2 className={styles.headline}>HOW HYPERMOLE WORKS</h2>
+          <p className={styles.sub}>Public activity goes in. Seismic structure comes out.</p>
         </div>
 
         <div className={styles.flow}>
@@ -30,6 +30,18 @@ export default function HowItWorks() {
               )}
             </div>
           ))}
+        </div>
+
+        <div className={styles.statement}>
+          <p className={styles.statementBig}>
+            HYPERMOLE DOESN&apos;T START WITH PRICE.
+            <br />
+            IT STARTS WITH MOVEMENT.
+          </p>
+          <p className={styles.statementSmall}>
+            Wallets wake. Funding routes change. Independent activity converges. HYPERMOLE turns
+            that movement into a readable seismic map.
+          </p>
         </div>
       </div>
     </section>

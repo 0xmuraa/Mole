@@ -8,7 +8,7 @@ export default function TokenStatus() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.panel}>
-          <span className={styles.eyebrow}>MOLE TOKEN</span>
+          <span className={styles.eyebrow}>HYPERMOLE TOKEN</span>
           <h2 className={styles.headline}>{isLive ? "TOKEN LIVE" : "NOT LIVE YET"}</h2>
 
           {isLive ? (
