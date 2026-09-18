@@ -188,11 +188,50 @@
 
 @keyframes rowIn {
   from {
-    opacity: 0;
+    opacity: 0.35;
     transform: translateY(-4px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.stageBox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  font-size: 12px;
+}
+
+.badgeCyan {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  background: rgba(56, 215, 237, 0.07);
+  border: 1px solid var(--border-cyan);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tagSCAN {
+  color: var(--muted);
+}
+
+.feedList {
+  min-height: 112px;
+}
+
+.feedMessage {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 520px) {
+  .badgeCyan {
+    display: none;
   }
 }

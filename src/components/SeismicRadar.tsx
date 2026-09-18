@@ -1,94 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import styles from "./SeismicRadar.module.css";
-import SeismicNetwork, { edgeKey } from "./SeismicNetwork";
-import { seismicNodes, seismicEdges, auditPool, type AuditRow } from "@/data/seismic";
+import NetworkStage from "./terminal/NetworkStage";
+import { useEngineSnapshot, useSeismicEngine } from "@/simulation/useSeismicEngine";
 
-const STATUS_PHRASES = [
-  "SCANNING SEISMIC LAYER...",
-  "MAPPING CONVERGENCE...",
-  "WATCHING FOR TREMORS...",
-  "TRACING FUNDING ROUTES...",
-];
+const STATUS = ["MONITORING CHAIN EVENTS…", "TRACING FUNDING ROUTES…", "DETECTING CONVERGENCE…", "SURFACING SIGNALS…"];
 
-function randomDelay(min: number, max: number) {
-  return min + Math.random() * (max - min);
-}
-
+// Hero preview of the flagship terminal: same SeismicEngine and NetworkStage
+// as /terminal, run in compact mode (fewer nodes, no tables).
 export default function SeismicRadar() {
-  const [flared, setFlared] = useState<Set<string>>(new Set());
-  const [epicenterId, setEpicenterId] = useState<string | null>(null);
-  const [wakingId, setWakingId] = useState<string | null>(null);
-  const [statusIndex, setStatusIndex] = useState(0);
-  const [rows, setRows] = useState(() => auditPool.slice(0, 5).map((e, i) => ({ ...e, age: i * 6, seq: i })));
-
-  const seqRef = useRef(5);
-  const cursorRef = useRef(5);
-
-  useEffect(() => {
-    let flareTimer: ReturnType<typeof setTimeout>;
-    const scheduleFlare = () => {
-      flareTimer = setTimeout(() => {
-        const count = 1 + Math.floor(Math.random() * 2);
-        const picks = new Set<string>();
-        while (picks.size < count) {
-          const edge = seismicEdges[Math.floor(Math.random() * seismicEdges.length)];
-          picks.add(edgeKey(edge.from, edge.to));
-        }
-        setFlared(picks);
-        scheduleFlare();
-      }, randomDelay(1800, 2600));
-    };
-    scheduleFlare();
-    return () => clearTimeout(flareTimer);
-  }, []);
-
-  useEffect(() => {
-    let tremorTimer: ReturnType<typeof setTimeout>;
-    const scheduleTremor = () => {
-      tremorTimer = setTimeout(() => {
-        const node = seismicNodes[Math.floor(Math.random() * seismicNodes.length)];
-        setEpicenterId(node.id);
-        setWakingId(node.id);
-        setTimeout(() => setEpicenterId(null), 1700);
-        setTimeout(() => setWakingId(null), 1300);
-        scheduleTremor();
-      }, randomDelay(4500, 6500));
-    };
-    scheduleTremor();
-    return () => clearTimeout(tremorTimer);
-  }, []);
-
-  useEffect(() => {
-    const statusTimer = setInterval(() => {
-      setStatusIndex((i) => (i + 1) % STATUS_PHRASES.length);
-    }, 4200);
-
-    const ageTimer = setInterval(() => {
-      setRows((prev) => prev.map((r) => ({ ...r, age: r.age + 1 })));
-    }, 1000);
-
-    const rotateTimer = setInterval(() => {
-      setRows((prev) => {
-        const next: AuditRow = auditPool[cursorRef.current % auditPool.length];
-        cursorRef.current += 1;
-        const seq = seqRef.current++;
-        return [{ ...next, age: 0, seq }, ...prev.slice(0, prev.length - 1)];
-      });
-    }, 3400);
-
-    return () => {
-      clearInterval(statusTimer);
-      clearInterval(ageTimer);
-      clearInterval(rotateTimer);
-    };
-  }, []);
-
-  const formatAge = (s: number) => (s < 60 ? `${s}s` : `${Math.floor(s / 60)}m`);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const engine = useSeismicEngine({ compact: true }, rootRef);
+  const snap = useEngineSnapshot(engine);
 
   return (
-    <div className={styles.terminal}>
+    <div ref={rootRef} className={styles.terminal}>
       <div className={styles.header}>
         <div className={styles.dots}>
           <span className={styles.dot} />
@@ -105,26 +32,26 @@ export default function SeismicRadar() {
       <div className={styles.modeRow}>
         <span className={styles.badge}>SEISMIC LIVE</span>
         <span className={styles.badge}>RH CHAIN</span>
-        <span className={styles.status}>{STATUS_PHRASES[statusIndex]}</span>
+        <span className={styles.badgeCyan}>MAG {snap.metrics.magnitude.toFixed(1)}</span>
+        <span className={styles.badgeCyan}>CONV {snap.metrics.convergence}</span>
+        <span className={styles.status}>{STATUS[snap.processStep]}</span>
       </div>
 
-      <SeismicNetwork
-        size="compact"
-        epicenterId={epicenterId}
-        flaredEdgeKeys={flared}
-        wakingNodeId={wakingId}
-      />
+      <div className={styles.stageBox}>
+        <NetworkStage engine={engine} compact />
+      </div>
 
       <div className={styles.feed}>
         <div className={styles.feedHeader}>
           <span className={styles.feedTitle}>HYPERMOLE AUDIT · PUBLIC SIGNALS</span>
+          <span className={styles.feedTitle}>EPICENTER · {snap.epicenterLabel ?? "SCANNING"}</span>
         </div>
         <ul className={styles.feedList}>
-          {rows.map((row) => (
-            <li key={row.seq} className={styles.feedRow}>
-              <span className={`${styles.feedTag} ${styles[`tag${row.tag}`]}`}>{row.tag}</span>
-              <span className={styles.feedMessage}>{row.message}</span>
-              <span className={styles.feedAge}>{formatAge(row.age)}</span>
+          {snap.audit.slice(0, 5).map((row) => (
+            <li key={row.id} className={styles.feedRow}>
+              <span className={`${styles.feedTag} ${styles[`tag${row.type}`]}`}>{row.type}</span>
+              <span className={styles.feedMessage}>{row.text}</span>
+              <span className={styles.feedAge}>{row.at}</span>
             </li>
           ))}
         </ul>

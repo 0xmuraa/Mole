@@ -38,22 +38,28 @@ The metaphor: onchain movement is seismic movement. When unusual activity starts
 - Public chain log & audit views
 - Docs
 
-These are planned modules. Only the homepage below is built.
+The homepage and the terminal are built as an illustrative simulation; the rest are planned.
 
-## Homepage (v2)
+## The terminal (`/terminal`)
 
-The homepage is a Next.js app and includes:
+The flagship surface is a full-viewport seismic observatory at `/terminal`, designed for 1920×1200 and screen recording. It is an **illustrative simulation** — it does not read Robinhood Chain yet, and it says so on screen (`DEMO MODE`, `ILLUSTRATIVE SIMULATION`).
 
-- A hero section with an animated, self-scanning seismic radar preview (`SeismicRadar` + `SeismicNetwork`), built with SVG and CSS — not a screenshot.
-- A "How HYPERMOLE Works" flow (Monitor → Trace → Detect → Surface).
-- A Tremors table and an Epicenters section with mini convergence graphs.
-- A full Seismic Observatory terminal showcase: a 20-node, four-region network (Fresh Wallets / Smart Clusters / Funding / Contracts) driven by a small frontend simulation engine that fires coordinated `WAKE`, `TRACE`, `FLOW`, `TREMOR`, `CONVERGENCE`, `EPICENTER` and `AFTERSHOCK` events — each event updates the network, the chart, the metrics and both log feeds together, on independently randomized intervals so it never repeats on a fixed beat.
-- An Open Source section linking to this repository.
-- A Token Status section driven entirely by `src/config/project.ts` — it will not show a contract address, buy link, or any token figures until that config is switched on.
+- 24 persistent nodes in four organic regions (Fresh Wallets, Smart Clusters, Funding, Contracts), ~51 base connections plus temporary "newly discovered" links, around a small HYPERMOLE seismic core.
+- One engine drives everything: `src/simulation/SeismicEngine.ts` owns nodes, edges, packets, seismic rings, metrics, chart, logs, audit and tremor history. Every event updates several of those at once, so the panels stay causally connected.
+- Event types: `WAKE`, `TRACE`, `FLOW`, `VERIFY`, minor `TREMOR`, large `TREMOR` (with chained `AFTERSHOCK`), `CONVERGENCE` (with `EPICENTER`), node `MIGRATION`. Intervals are re-rolled after every firing, so a recording never visibly loops.
+- Metrics have inertia: magnitude/convergence rise quickly on events and cool gradually; the tremor score follows them.
+- Rendering is split in two: the network and chart scroll are applied imperatively every frame (no React re-renders), while panels read an immutable snapshot a few times per second.
+- URL flags: `/terminal?speed=0.5|1|1.5|2` tunes intensity, `/terminal?recording=1` hides the AUTO/PAUSE control. `prefers-reduced-motion` disables migration and thins out packets and rings.
 
-All numbers, wallet identifiers, feed events, magnitudes and scores shown on the homepage are demo/simulation data (see `src/data/seismic.ts`), clearly labeled in the UI (`DEMO MODE`, `DEMO DATA`, `SIMULATION`, `ILLUSTRATIVE`). None of it reflects real Robinhood Chain activity. Nothing on the site claims live user counts, wallet counts, trading results, P&L, historical performance, or partnerships.
+## Homepage
 
-Not built yet: the standalone `/terminal` product, real public-chain data integration, and token integration.
+The homepage reuses the same engine and `NetworkStage` component — the hero radar runs it in compact mode, and the terminal section embeds the real terminal. There is no second simulation.
+
+It also includes a live seismic activity panel, a flow ticker, a telemetry row, a four-step "How HYPERMOLE works" pipeline, an Epicenters section (lifecycle cards, 24h tremor timeline, emerging-activity table, legend), an Open Source section, and a Token Status section driven entirely by `src/config/project.ts` — it will not show a contract address, buy link, or token figures until that config is switched on.
+
+All identifiers, magnitudes, scores, ticker values and feed events on the site are illustrative content (`src/simulation`, `src/data/seismic.ts`). None of it reflects real Robinhood Chain activity, and nothing on the site claims live user counts, trading results, P&L, historical performance, or partnerships.
+
+Not built yet: real public-chain data integration and token integration.
 
 ## Tech stack
 
@@ -93,22 +99,22 @@ mole/
 │       └── mole-hero.png
 └── src/
     ├── app/            # Next.js App Router: layout, homepage, global styles
-    ├── components/      # Homepage sections (Navbar, Hero, SeismicNetwork, SeismicTerminal, ...)
+    ├── components/      # Homepage sections + components/terminal (the flagship terminal UI)
     ├── config/          # Central project config — including the token-live switch
-    ├── data/            # Demo/simulation data used by the homepage previews
-    └── lib/             # Small shared helpers (e.g. tunnel path math)
+    ├── data/            # Illustrative content for homepage sections
+    └── simulation/      # SeismicEngine: network, events, generators, React hook
 ```
 
 ## Status
 
-Early development. The v2 homepage above is implemented. The terminal product, live data layer, and token integration are not.
+Early development. The homepage and the `/terminal` observatory are implemented as an illustrative simulation. The live data layer and token integration are not.
 
 This project began under the name MOLE / "Underground Intelligence." It has since been repositioned as **HYPERMOLE**, an onchain seismic radar, with a simplified vocabulary and a denser, more active terminal. The original pixel-art mole mascot carries over unchanged.
 
 ## Links
 
-- Website: Coming soon
-- Terminal: Coming soon
+- Website: https://hypermole.vercel.app
+- Terminal: https://hypermole.vercel.app/terminal
 - X: Coming soon
 - Docs: [./docs/](./docs/)
 

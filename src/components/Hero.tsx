@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Hero.module.css";
 import SeismicRadar from "./SeismicRadar";
 import LiveSeismicPanel from "./LiveSeismicPanel";
@@ -24,9 +25,9 @@ export default function Hero() {
           </p>
 
           <div className={styles.ctaRow}>
-            <a href="#terminal" className="btnPrimary">
+            <Link href="/terminal" className="btnPrimary">
               OPEN TERMINAL
-            </a>
+            </Link>
             <a href="#how-it-works" className="btnSecondary">
               HOW IT WORKS
             </a>

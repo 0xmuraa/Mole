@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import FlowTicker from "@/components/FlowTicker";
 import StatsRow from "@/components/StatsRow";
 import HowItWorks from "@/components/HowItWorks";
-import SeismicTerminal from "@/components/SeismicTerminal";
+import TerminalSection from "@/components/TerminalSection";
 import Epicenters from "@/components/Epicenters";
 import OpenSource from "@/components/OpenSource";
 import TokenStatus from "@/components/TokenStatus";
@@ -20,7 +20,7 @@ export default function Home() {
         <FlowTicker />
         <StatsRow />
         <HowItWorks />
-        <SeismicTerminal />
+        <TerminalSection />
         <Epicenters />
         <OpenSource />
         <TokenStatus />

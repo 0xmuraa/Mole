@@ -38,7 +38,7 @@ export type NavLink = {
 // section (the closest available preview of that future product page) or
 // the real docs folder on GitHub. None of these are placeholder/dead links.
 export const navLinks: NavLink[] = [
-  { label: "TERMINAL", href: "#terminal" },
+  { label: "TERMINAL", href: "/terminal" },
   { label: "TREMORS", href: "#tremors" },
   { label: "HOW IT WORKS", href: "#how-it-works" },
   { label: "MAP", href: "#map" },
