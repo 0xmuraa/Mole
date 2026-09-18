@@ -1,0 +1,27 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(70% 45% at 75% 0%, rgba(255, 184, 60, 0.07), transparent 60%),
+    radial-gradient(50% 40% at 10% 100%, rgba(56, 215, 237, 0.05), transparent 60%),
+    var(--bg);
+}
+
+.dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(56, 215, 237, 0.16) 1px, transparent 1.2px);
+  background-size: 34px 34px;
+  opacity: 0.35;
+  mask-image: radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

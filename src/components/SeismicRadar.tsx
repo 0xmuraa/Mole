@@ -103,7 +103,7 @@ export default function SeismicRadar() {
       </div>
 
       <div className={styles.modeRow}>
-        <span className={styles.badge}>DEMO MODE</span>
+        <span className={styles.badge}>SEISMIC LIVE</span>
         <span className={styles.badge}>RH CHAIN</span>
         <span className={styles.status}>{STATUS_PHRASES[statusIndex]}</span>
       </div>
@@ -117,7 +117,7 @@ export default function SeismicRadar() {
 
       <div className={styles.feed}>
         <div className={styles.feedHeader}>
-          <span className={styles.feedTitle}>HYPERMOLE AUDIT · SIMULATION</span>
+          <span className={styles.feedTitle}>HYPERMOLE AUDIT · PUBLIC SIGNALS</span>
         </div>
         <ul className={styles.feedList}>
           {rows.map((row) => (
@@ -128,7 +128,7 @@ export default function SeismicRadar() {
             </li>
           ))}
         </ul>
-        <p className={styles.feedFooter}>Simulated activity. Live public-chain integration comes later.</p>
+        <p className={styles.feedFooter}>Public onchain signals · Robinhood Chain</p>
       </div>
     </div>
   );

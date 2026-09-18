@@ -144,7 +144,7 @@
 }
 
 .coreBadge {
-  width: clamp(38px, 8%, 58px);
+  width: clamp(44px, 9.2%, 66px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   position: relative;

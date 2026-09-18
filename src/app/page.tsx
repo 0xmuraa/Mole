@@ -1,9 +1,11 @@
+import PageBackdrop from "@/components/PageBackdrop";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import FlowTicker from "@/components/FlowTicker";
+import StatsRow from "@/components/StatsRow";
 import HowItWorks from "@/components/HowItWorks";
-import Tremors from "@/components/Tremors";
-import Epicenters from "@/components/Epicenters";
 import SeismicTerminal from "@/components/SeismicTerminal";
+import Epicenters from "@/components/Epicenters";
 import OpenSource from "@/components/OpenSource";
 import TokenStatus from "@/components/TokenStatus";
 import Footer from "@/components/Footer";
@@ -11,13 +13,15 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <PageBackdrop />
       <Navbar />
       <main>
         <Hero />
+        <FlowTicker />
+        <StatsRow />
         <HowItWorks />
-        <Tremors />
-        <Epicenters />
         <SeismicTerminal />
+        <Epicenters />
         <OpenSource />
         <TokenStatus />
       </main>

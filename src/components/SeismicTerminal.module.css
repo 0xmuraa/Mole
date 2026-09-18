@@ -1,37 +1,122 @@
-.section {
-  background: var(--bg-secondary);
-  padding: 0 0 100px;
-}
-
-.head {
-  max-width: 62ch;
+.intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
   margin-bottom: 36px;
 }
 
-.eyebrow {
+@media (min-width: 980px) {
+  .intro {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+  }
+}
+
+.introText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 60ch;
+}
+
+.introText :global(.h2) {
+  margin-bottom: 0;
+}
+
+.triLine {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  color: var(--cyan);
+}
+
+.introActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(11, 13, 12, 0.85);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  cursor: default;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.feature:hover {
+  border-color: var(--border-cyan);
+  background: var(--panel-elevated);
+  transform: translateX(2px);
+}
+
+.featureIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-cyan);
+  border-radius: var(--radius-sm);
+  background: rgba(56, 215, 237, 0.05);
+}
+
+.featureIcon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.featureTitle {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
-  color: var(--amber);
-  margin-bottom: 12px;
-  display: block;
-}
-
-.headline {
-  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.1em;
   color: var(--cream);
-  margin-bottom: 10px;
 }
 
-.sub {
+.featureCopy {
+  font-size: 12.5px;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.55;
+}
+
+.featureArrow {
+  margin-left: auto;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  transition: transform 0.2s ease;
+}
+
+.feature:hover .featureArrow {
+  transform: translateX(4px);
 }
 
 .frame {
+  scroll-margin-top: 84px;
   background: var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);

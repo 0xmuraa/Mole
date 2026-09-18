@@ -1,0 +1,136 @@
+.ticker {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
+  background: rgba(8, 9, 8, 0.9);
+  height: 46px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px;
+  border-right: 1px solid var(--panel-border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--cream);
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: rgba(8, 9, 8, 0.98);
+}
+
+.waveIcon {
+  width: 24px;
+  height: 12px;
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  animation: draw 3.2s ease-in-out infinite;
+}
+
+.viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 22px;
+  border-right: 1px solid rgba(34, 36, 31, 0.9);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.symbol {
+  color: var(--cream);
+  letter-spacing: 0.06em;
+}
+
+.value {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.change {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.up {
+  color: var(--status-green);
+}
+
+.down {
+  color: var(--danger);
+  opacity: 0.85;
+}
+
+.flat {
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .label span:nth-child(2) {
+    display: none;
+  }
+
+  .label {
+    padding: 0 12px;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 60;
+    opacity: 0.5;
+  }
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}

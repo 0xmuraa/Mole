@@ -1,6 +1,6 @@
 .section {
-  background: var(--bg-secondary);
-  padding: 0 0 96px;
+  position: relative;
+  padding: var(--section-pad) 0 0;
 }
 
 .panel {

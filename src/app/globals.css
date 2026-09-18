@@ -2,20 +2,25 @@
   /* HYPERMOLE V2 — black intelligence terminal + amber identity + cyan seismic data.
      Brown is now a supporting color (mascot, faint depth), not a UI-dominant one. */
   --bg: #050505;
-  --bg-secondary: #090909;
-  --panel: #0d0d0c;
-  --panel-elevated: #121210;
-  --panel-border: #25231e;
+  --bg-secondary: #080908;
+  --panel: #0b0d0c;
+  --panel-elevated: #0e100f;
+  --panel-border: #22241f;
+  --border-amber: rgba(255, 184, 60, 0.18);
+  --border-cyan: rgba(62, 215, 237, 0.16);
   --earth: #352315;
   --earth-light: #4a3220;
-  --amber: #f2a63b;
-  --gold: #ffd36a;
-  --cyan: #4fd9eb;
-  --cyan-deep: #167a8a;
-  --cream: #f1eee7;
-  --muted: #88857c;
-  --danger: #d9604c;
-  --status-green: #76c96b;
+  --amber: #ffb83c;
+  --gold: #ffc85a;
+  --cyan: #38d7ed;
+  --cyan-deep: #29c9e8;
+  --cyan-dim: #1b7a8a;
+  --cream: #f3f1eb;
+  --muted: #94948d;
+  --danger: #ff5f63;
+  --status-green: #3dff91;
+
+  --section-pad: 88px;
 
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
@@ -81,6 +86,143 @@ p {
 
 .pixelSharp {
   image-rendering: pixelated;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --section-pad: 60px;
+  }
+}
+
+/* Page content sits above the fixed low-opacity backdrop. */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  position: relative;
+  padding: var(--section-pad) 0 0;
+}
+
+.sectionHead {
+  max-width: 62ch;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.h2 {
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.h2 em {
+  font-style: normal;
+  color: var(--cyan);
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  background: rgba(255, 184, 60, 0.08);
+  border: 1px solid var(--border-amber);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.tagCyan {
+  color: var(--cyan);
+  background: rgba(56, 215, 237, 0.07);
+  border-color: var(--border-cyan);
+}
+
+.tagGreen {
+  color: var(--status-green);
+  background: rgba(61, 255, 145, 0.07);
+  border-color: rgba(61, 255, 145, 0.25);
+}
+
+.liveDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-green);
+  box-shadow: 0 0 0 0 rgba(61, 255, 145, 0.5);
+  animation: breatheDot 2.4s ease-in-out infinite;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #0b0a08;
+  background: linear-gradient(90deg, var(--amber), var(--gold));
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btnPrimary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -10px rgba(255, 184, 60, 0.6);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.btnSecondary:hover {
+  border-color: var(--amber);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+@keyframes breatheDot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(61, 255, 145, 0.45);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 0 5px rgba(61, 255, 145, 0);
+  }
 }
 
 /* Sticky nav is 68px tall — leave room so anchor-jumps don't clip section headings. */

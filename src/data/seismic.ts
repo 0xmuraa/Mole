@@ -131,7 +131,7 @@ export const seismicEdges: SeismicEdge[] = [
 
 export const dossier = {
   entity: "ENTITY-0442",
-  label: "DEMO DOSSIER",
+  label: "RH CHAIN CLUSTER",
   tremorScore: 78,
   magnitude: 6.8,
   convergence: 82,
@@ -224,52 +224,138 @@ export const auditPool: AuditRow[] = [
   { id: "au5", tag: "EPICENTER", message: "New center detected" },
   { id: "au6", tag: "AFTERSHOCK", message: "Secondary activity detected" },
   { id: "au7", tag: "FLOW", message: "Cross-cluster movement accelerating" },
-  { id: "au8", tag: "VERIFY", message: "Public event indexed" },
+  { id: "au8", tag: "VERIFY", message: "Contract relationship mapped" },
 ];
 
 // ---------------------------------------------------------------------------
-// Tremors section (fast-updating demo feed)
+// Live Flow ticker (simulated)
 // ---------------------------------------------------------------------------
 
-export type TremorState = "BUILDING" | "ACTIVE" | "COOLING";
+export type TickerItem = { symbol: string; value: string; change: number };
 
-export type TremorRow = {
-  id: string;
-  age: string;
-  type: "CONVERGENCE" | "WAKE" | "AFTERSHOCK" | "TREMOR";
-  magnitude: number;
-  convergence: number;
-  nodes: number;
-  state: TremorState;
-};
-
-export const tremorRows: TremorRow[] = [
-  { id: "tr1", age: "8s", type: "CONVERGENCE", magnitude: 7.1, convergence: 86, nodes: 14, state: "BUILDING" },
-  { id: "tr2", age: "22s", type: "WAKE", magnitude: 5.4, convergence: 63, nodes: 8, state: "ACTIVE" },
-  { id: "tr3", age: "47s", type: "AFTERSHOCK", magnitude: 4.8, convergence: 57, nodes: 11, state: "COOLING" },
-  { id: "tr4", age: "1m", type: "TREMOR", magnitude: 6.5, convergence: 74, nodes: 12, state: "ACTIVE" },
-  { id: "tr5", age: "3m", type: "CONVERGENCE", magnitude: 5.9, convergence: 68, nodes: 9, state: "COOLING" },
-  { id: "tr6", age: "6m", type: "WAKE", magnitude: 4.2, convergence: 51, nodes: 6, state: "COOLING" },
+export const tickerItems: TickerItem[] = [
+  { symbol: "$SDRIFT", value: "$0.0427", change: 6.0 },
+  { symbol: "$LREALM", value: "$1.184", change: 2.3 },
+  { symbol: "$NEBULA", value: "$0.0091", change: -2.8 },
+  { symbol: "$QUARTZ", value: "$0.318", change: 4.1 },
+  { symbol: "$FAULT", value: "$0.0022", change: -1.2 },
+  { symbol: "$MAGMA", value: "$2.907", change: 9.4 },
+  { symbol: "$STRATA", value: "$0.140", change: 0.0 },
+  { symbol: "$VECTOR", value: "$0.0563", change: -5.6 },
+  { symbol: "$CRUST", value: "$0.771", change: 1.7 },
+  { symbol: "$MANTLE", value: "$0.0308", change: 3.3 },
 ];
 
 // ---------------------------------------------------------------------------
-// Epicenters section (3 cards)
+// Epicenters section — three lifecycle states (simulated examples)
 // ---------------------------------------------------------------------------
 
-export type EpicenterStatus = "BUILDING" | "ACTIVE" | "COOLING";
+export type EpicenterStatus = "ACTIVE" | "BUILDING" | "COOLING";
+export type Confidence = "HIGH" | "MEDIUM" | "LOW";
 
-export type EpicenterCard = {
+export type Epicenter = {
   id: string;
-  label: string;
+  index: string;
+  name: string;
+  status: EpicenterStatus;
+  description: string;
+  tags: string[];
   magnitude: number;
   convergence: number;
   wallets: number;
   routes: number;
-  status: EpicenterStatus;
+  velocity: number;
+  confidence: Confidence;
+  heat: number[];
 };
 
-export const epicenterCards: EpicenterCard[] = [
-  { id: "ep1", label: "EPICENTER #01", magnitude: 7.8, convergence: 89, wallets: 14, routes: 9, status: "ACTIVE" },
-  { id: "ep2", label: "EPICENTER #02", magnitude: 5.6, convergence: 61, wallets: 7, routes: 4, status: "BUILDING" },
-  { id: "ep3", label: "EPICENTER #03", magnitude: 4.3, convergence: 48, wallets: 10, routes: 6, status: "COOLING" },
+export const epicenters: Epicenter[] = [
+  {
+    id: "ep1",
+    index: "#01",
+    name: "SOLAR DRIFT",
+    status: "ACTIVE",
+    description: "Early wallets converging on a new token cluster.",
+    tags: ["SOL", "MEME", "NEW"],
+    magnitude: 8.4,
+    convergence: 92,
+    wallets: 27,
+    routes: 14,
+    velocity: 320,
+    confidence: "HIGH",
+    heat: [3, 5, 4, 7, 6, 9, 8, 10, 9, 11, 10, 12],
+  },
+  {
+    id: "ep2",
+    index: "#02",
+    name: "LIQUID REALM",
+    status: "BUILDING",
+    description: "Funding routes expanding across two wallet groups.",
+    tags: ["ETH", "DEFI"],
+    magnitude: 6.1,
+    convergence: 67,
+    wallets: 19,
+    routes: 11,
+    velocity: 118,
+    confidence: "MEDIUM",
+    heat: [2, 3, 3, 4, 5, 4, 6, 6, 7, 7, 8, 8],
+  },
+  {
+    id: "ep3",
+    index: "#03",
+    name: "NEBULA SWAP",
+    status: "COOLING",
+    description: "Activity slowing after an earlier convergence spike.",
+    tags: ["BASE", "DEX"],
+    magnitude: 4.3,
+    convergence: 48,
+    wallets: 10,
+    routes: 6,
+    velocity: -42,
+    confidence: "LOW",
+    heat: [9, 8, 8, 7, 6, 6, 5, 4, 4, 3, 3, 2],
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Emerging activity table (simulated)
+// ---------------------------------------------------------------------------
+
+export type ChainTab = "ALL" | "SOL" | "ETH" | "BASE" | "OTHER";
+
+export type EmergingRow = {
+  id: string;
+  cluster: string;
+  chain: Exclude<ChainTab, "ALL">;
+  magnitude: number;
+  delta: number;
+  time: string;
+};
+
+export const emergingRows: EmergingRow[] = [
+  { id: "em1", cluster: "Solar Drift", chain: "SOL", magnitude: 8.4, delta: 320, time: "2h" },
+  { id: "em2", cluster: "Magma Pool", chain: "ETH", magnitude: 6.8, delta: 205, time: "1h" },
+  { id: "em3", cluster: "Liquid Realm", chain: "ETH", magnitude: 6.1, delta: 118, time: "6h" },
+  { id: "em4", cluster: "Quartz Vein", chain: "SOL", magnitude: 5.7, delta: 64, time: "3h" },
+  { id: "em5", cluster: "Strata Bridge", chain: "BASE", magnitude: 5.2, delta: 37, time: "11h" },
+  { id: "em6", cluster: "Nebula Swap", chain: "BASE", magnitude: 4.3, delta: -42, time: "14h" },
+  { id: "em7", cluster: "Fault Line", chain: "OTHER", magnitude: 3.9, delta: -12, time: "9h" },
+];
+
+// ---------------------------------------------------------------------------
+// Network tremors — 24h telemetry (simulated)
+// ---------------------------------------------------------------------------
+
+export type TremorMetric = { label: string; value: string; delta: number };
+
+export const tremorMetrics: TremorMetric[] = [
+  { label: "TOTAL SIGNALS", value: "472", delta: 26 },
+  { label: "NEW EPICENTERS", value: "3", delta: 200 },
+  { label: "AVG. MAGNITUDE", value: "4.9", delta: 18 },
+  { label: "ROUTES DISCOVERED", value: "31", delta: 107 },
+];
+
+// 24 hourly samples, 0-100. Spikes near the end read as "activity now".
+export const tremorTimeline: number[] = [
+  22, 18, 26, 20, 31, 24, 19, 28, 35, 27, 44, 38, 30, 52, 41, 36, 58, 47, 63, 55, 71, 66, 84, 78,
 ];

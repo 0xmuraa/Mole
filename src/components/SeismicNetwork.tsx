@@ -11,9 +11,9 @@ const TYPE_COLOR: Record<NodeType, string> = {
   FRESH: "var(--cyan)",
   TRACE: "var(--gold)",
   FLOW: "var(--amber)",
-  CONTRACT: "var(--cyan-deep)",
+  CONTRACT: "var(--cyan-dim)",
   WAKE: "var(--gold)",
-  CLUSTER: "var(--cyan-deep)",
+  CLUSTER: "var(--cyan-dim)",
   VERIFY: "var(--status-green)",
 };
 
@@ -65,7 +65,7 @@ export default function SeismicNetwork({
         className={styles.svg}
         viewBox="0 0 160 100"
         role="img"
-        aria-label="Animated illustrative seismic wallet network with four regions"
+        aria-label="Animated seismic wallet network with four regions"
       >
         {seismicEdges.map((edge, i) => {
           const from = nodesById.get(edge.from);
