@@ -115,7 +115,7 @@ This project began under the name MOLE / "Underground Intelligence." It has sinc
 
 - Website: https://hypermole.vercel.app
 - Terminal: https://hypermole.vercel.app/terminal
-- X: Coming soon
+- X: https://x.com/0x_mura
 - Docs: [./docs/](./docs/)
 
 ## Roadmap

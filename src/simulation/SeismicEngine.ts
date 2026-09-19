@@ -1,6 +1,6 @@
 import { BASE, CHART, FIRST_FIRE, RANGE, REGION_LABEL, TIMING, type TimerKind } from "./config";
 import { createNetwork, makeEdge, nodeLabel } from "./createNetwork";
-import { AUDIT_TEXT, DEMO_ENTITY, clamp, clockTime, demoWalletId, flowValue, pick, rand, randInt } from "./generators";
+import { AUDIT_TEXT, DEMO_ENTITY, DEMO_TARGET, clamp, clockTime, demoWalletId, flowValue, pick, rand, randInt } from "./generators";
 import type {
   AuditRow,
   AuditType,
@@ -127,6 +127,7 @@ export class SeismicEngine {
       topologyVersion: 0,
       selection: null,
       epicenterLabel: null,
+      epicenterAddr: null,
       paused: false,
     };
   }
@@ -289,7 +290,7 @@ export class SeismicEngine {
 
     if (this.epicenterId && this.t > this.epicenterUntil) {
       this.epicenterId = null;
-      this.commit({ epicenterLabel: null });
+      this.commit({ epicenterLabel: null, epicenterAddr: null });
     }
   }
 
@@ -442,7 +443,9 @@ export class SeismicEngine {
   private setEpicenter(node: SimNode, dur: number) {
     this.epicenterId = node.id;
     this.epicenterUntil = this.t + dur;
-    this.commit({ epicenterLabel: nodeLabel(node) });
+    this.commit({ epicenterLabel: nodeLabel(node), epicenterAddr: node.addr });
+    // the target is part of the event: the public log names the asset too
+    this.pushLog("CONTRACT", true);
   }
 
   private setProcess(step: number) {
@@ -639,7 +642,7 @@ export class SeismicEngine {
     this.mark("cyan");
     this.pushHistory(reading);
     this.pushAudit("TREMOR", `Magnitude increased to ${reading.toFixed(1)}`, true);
-    if (claims) this.later(0.35, () => this.pushAudit("EPICENTER", `${pick(AUDIT_TEXT.EPICENTER)} · ${nodeLabel(node)}`, true));
+    if (claims) this.later(0.35, () => this.pushAudit("EPICENTER", `Activity converging around ${DEMO_TARGET.ticker} · ${nodeLabel(node)}`, true));
     this.pushLog("TREMOR", true, `+${reading.toFixed(1)}`);
     this.setFinding(4);
     this.setProcess(2);
@@ -731,7 +734,7 @@ export class SeismicEngine {
       this.magTarget += rand(0.6, 1.2);
       this.mark("amber");
       this.pushHistory(clamp(this.magTarget, RANGE.magnitude[0], RANGE.magnitude[1]));
-      this.pushAudit("EPICENTER", `${pick(AUDIT_TEXT.EPICENTER)} · ${label}`, true);
+      this.pushAudit("EPICENTER", `Activity converging around ${DEMO_TARGET.ticker} · ${label}`, true);
       this.setProcess(3);
     });
     this.later(dur + 0.4, () => this.setTopHistory("ACTIVE"));

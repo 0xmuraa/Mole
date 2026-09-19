@@ -24,8 +24,7 @@ export type SocialLinks = {
 
 export const socials: SocialLinks = {
   github: "https://github.com/0xmuraa/Mole",
-  // No confirmed project X account yet. Keep null until a real URL exists.
-  x: null,
+  x: "https://x.com/0x_mura",
 };
 
 export type NavLink = {

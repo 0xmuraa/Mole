@@ -30,6 +30,7 @@ export type Confidence = "HIGH" | "MEDIUM" | "LOW";
 export type Epicenter = {
   id: string;
   index: string;
+  ticker: string;
   name: string;
   status: EpicenterStatus;
   description: string;
@@ -47,6 +48,7 @@ export const epicenters: Epicenter[] = [
   {
     id: "ep1",
     index: "#01",
+    ticker: "$SOLAR",
     name: "SOLAR DRIFT",
     status: "ACTIVE",
     description: "Early wallets converging on a new token cluster.",
@@ -62,6 +64,7 @@ export const epicenters: Epicenter[] = [
   {
     id: "ep2",
     index: "#02",
+    ticker: "$LIQUID",
     name: "LIQUID REALM",
     status: "BUILDING",
     description: "Funding routes expanding across two wallet groups.",
@@ -77,6 +80,7 @@ export const epicenters: Epicenter[] = [
   {
     id: "ep3",
     index: "#03",
+    ticker: "$NSWAP",
     name: "NEBULA SWAP",
     status: "COOLING",
     description: "Activity slowing after an earlier convergence spike.",
@@ -99,6 +103,7 @@ export type ChainTab = "ALL" | "SOL" | "ETH" | "BASE" | "OTHER";
 
 export type EmergingRow = {
   id: string;
+  ticker: string;
   cluster: string;
   chain: Exclude<ChainTab, "ALL">;
   magnitude: number;
@@ -107,13 +112,13 @@ export type EmergingRow = {
 };
 
 export const emergingRows: EmergingRow[] = [
-  { id: "em1", cluster: "Solar Drift", chain: "SOL", magnitude: 8.4, delta: 320, time: "2h" },
-  { id: "em2", cluster: "Magma Pool", chain: "ETH", magnitude: 6.8, delta: 205, time: "1h" },
-  { id: "em3", cluster: "Liquid Realm", chain: "ETH", magnitude: 6.1, delta: 118, time: "6h" },
-  { id: "em4", cluster: "Quartz Vein", chain: "SOL", magnitude: 5.7, delta: 64, time: "3h" },
-  { id: "em5", cluster: "Strata Bridge", chain: "BASE", magnitude: 5.2, delta: 37, time: "11h" },
-  { id: "em6", cluster: "Nebula Swap", chain: "BASE", magnitude: 4.3, delta: -42, time: "14h" },
-  { id: "em7", cluster: "Fault Line", chain: "OTHER", magnitude: 3.9, delta: -12, time: "9h" },
+  { id: "em1", ticker: "$SOLAR", cluster: "Solar Drift", chain: "SOL", magnitude: 8.4, delta: 320, time: "2h" },
+  { id: "em2", ticker: "$MAGMA", cluster: "Magma Pool", chain: "ETH", magnitude: 6.8, delta: 205, time: "1h" },
+  { id: "em3", ticker: "$LIQUID", cluster: "Liquid Realm", chain: "ETH", magnitude: 6.1, delta: 118, time: "6h" },
+  { id: "em4", ticker: "$QUARTZ", cluster: "Quartz Vein", chain: "SOL", magnitude: 5.7, delta: 64, time: "3h" },
+  { id: "em5", ticker: "$STRATA", cluster: "Strata Bridge", chain: "BASE", magnitude: 5.2, delta: 37, time: "11h" },
+  { id: "em6", ticker: "$NSWAP", cluster: "Nebula Swap", chain: "BASE", magnitude: 4.3, delta: -42, time: "14h" },
+  { id: "em7", ticker: "$FAULT", cluster: "Fault Line", chain: "OTHER", magnitude: 3.9, delta: -12, time: "9h" },
 ];
 
 // ---------------------------------------------------------------------------

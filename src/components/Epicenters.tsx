@@ -72,7 +72,10 @@ function EpicenterCard({ ep }: { ep: Epicenter }) {
       </div>
 
       <div className={styles.cardTitleRow}>
-        <h3 className={styles.cardName}>{ep.name}</h3>
+        <h3 className={styles.cardName}>
+          <span className={styles.ticker}>{ep.ticker}</span>
+          {ep.name}
+        </h3>
         <div className={styles.tags}>
           {ep.tags.map((t) => (
             <span key={t} className={styles.tagChip}>
@@ -179,6 +182,7 @@ function EmergingActivity() {
             <tr key={r.id} className={styles.row} style={{ animationDelay: `${i * 0.05}s` }}>
               <td className={styles.dim}>{String(i + 1).padStart(2, "0")}</td>
               <td>
+                <span className={styles.ticker}>{r.ticker}</span>
                 <span className={styles.cluster}>{r.cluster}</span>
                 <span className={styles.chainChip}>{r.chain}</span>
               </td>

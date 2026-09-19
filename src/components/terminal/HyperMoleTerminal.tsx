@@ -7,6 +7,7 @@ import s from "./terminal.module.css";
 import NetworkStage from "./NetworkStage";
 import { EntityDossier, HyperMoleAudit, PublicEventLog, RouteFlow, SurfaceActivity } from "./panels";
 import { useEngineSnapshot, useSeismicEngine } from "@/simulation/useSeismicEngine";
+import { DEMO_TARGET } from "@/simulation/generators";
 
 const noopSubscribe = () => () => {};
 const readRecordingFlag = () => new URLSearchParams(window.location.search).get("recording") === "1";
@@ -108,6 +109,8 @@ export default function HyperMoleTerminal({ variant = "page", labels = "simulati
             findingIndex={snap.findingIndex}
             selection={snap.selection}
             sim={sim}
+            epicenterLabel={snap.epicenterLabel}
+            epicenterAddr={snap.epicenterAddr}
             onClear={() => engine.select(null)}
           />
           <RouteFlow metrics={m} routes={snap.routes} />
@@ -130,7 +133,7 @@ export default function HyperMoleTerminal({ variant = "page", labels = "simulati
             <span data-k="converging">CONVERGING</span>
             <span data-k="verified">VERIFIED</span>
             <b>
-              EPICENTER <em>{snap.epicenterLabel ?? "SCANNING…"}</em>
+              TARGET <em>{DEMO_TARGET.ticker}</em> · EPICENTER <em>{snap.epicenterLabel ?? "SCANNING…"}</em>
             </b>
           </footer>
         </section>

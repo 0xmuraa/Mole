@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "./NetworkStage.module.css";
 import { REGION_LABEL, ROLE_COLOR, ROLE_GLYPH } from "@/simulation/config";
 import { nodeLabel } from "@/simulation/createNetwork";
+import { DEMO_TARGET } from "@/simulation/generators";
 import type { SeismicEngine } from "@/simulation/SeismicEngine";
 import type { RegionId, Tone } from "@/simulation/types";
 
@@ -274,7 +275,10 @@ export default function NetworkStage({ engine, compact = false }: { engine: Seis
                   {ROLE_GLYPH[n.role]}
                 </text>
                 <circle className={styles.light} cx={13.5} cy={-13.5} r={3} />
-                <text className={styles.epiLabel} y={-39}>
+                <text className={styles.epiTicker} y={-46}>
+                  {DEMO_TARGET.ticker}
+                </text>
+                <text className={styles.epiLabel} y={-35}>
                   EPICENTER
                 </text>
                 <text className={styles.label} y={33} data-label>

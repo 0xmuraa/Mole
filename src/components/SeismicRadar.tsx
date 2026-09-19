@@ -4,6 +4,7 @@ import { useRef } from "react";
 import styles from "./SeismicRadar.module.css";
 import NetworkStage from "./terminal/NetworkStage";
 import { useEngineSnapshot, useSeismicEngine } from "@/simulation/useSeismicEngine";
+import { DEMO_TARGET } from "@/simulation/generators";
 
 const STATUS = ["MONITORING CHAIN EVENTS…", "TRACING FUNDING ROUTES…", "DETECTING CONVERGENCE…", "SURFACING SIGNALS…"];
 
@@ -44,7 +45,7 @@ export default function SeismicRadar() {
       <div className={styles.feed}>
         <div className={styles.feedHeader}>
           <span className={styles.feedTitle}>HYPERMOLE AUDIT · PUBLIC SIGNALS</span>
-          <span className={styles.feedTitle}>EPICENTER · {snap.epicenterLabel ?? "SCANNING"}</span>
+          <span className={styles.feedTitle}>{DEMO_TARGET.ticker} · EPICENTER · {snap.epicenterLabel ?? "SCANNING"}</span>
         </div>
         <ul className={styles.feedList}>
           {snap.audit.slice(0, 5).map((row) => (

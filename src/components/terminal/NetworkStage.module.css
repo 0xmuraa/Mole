@@ -239,6 +239,25 @@
   opacity: 1;
 }
 
+.epiTicker {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  fill: #fff2c9;
+  text-anchor: middle;
+  opacity: 0;
+  paint-order: stroke;
+  stroke: #080808;
+  stroke-width: 4px;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.node[data-epicenter] .epiTicker {
+  opacity: 1;
+}
+
 /* ---------- region labels ---------- */
 
 .region {
@@ -319,7 +338,7 @@
 
 .coreDisc {
   position: absolute;
-  inset: 9%;
+  inset: 7%;
   border-radius: 50%;
   overflow: hidden;
   background: radial-gradient(circle at 40% 32%, #1d1710, #070707 75%);
@@ -329,7 +348,7 @@
 .coreImg {
   object-fit: cover;
   object-position: 55% 40%;
-  transform: scale(1.12);
+  transform: scale(1.36);
 }
 
 .coreText {

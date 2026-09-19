@@ -93,12 +93,15 @@ export function makeEdge(a: string, b: string, kind: SimEdge["kind"], bend: numb
 export function createNetwork(compact: boolean) {
   const rng = mulberry32(42);
   const defs = compact ? NODE_DEFS.filter((d) => COMPACT_NUMS.has(d[0])) : NODE_DEFS;
+  const HEX = "0123456789ABCDEF";
+  const hex = (n: number) => Array.from({ length: n }, () => HEX[Math.floor(rng() * 16)]).join("");
 
   const nodes: SimNode[] = defs.map(([num, role, region, bx, by]) => ({
     id: nodeId(num),
     role,
     num,
     region,
+    addr: `0x${hex(3)}…${hex(3)}`,
     bx,
     by,
     x: bx,

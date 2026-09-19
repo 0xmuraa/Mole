@@ -44,6 +44,37 @@
   font-size: 2.5em;
 }
 
+.epicenterRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.15em 0.8em;
+  padding: 0.45em 0.7em;
+  border: 1px dashed var(--t-border);
+  border-radius: 4px;
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.epicenterRow[data-live] {
+  border: 1px solid rgba(255, 211, 106, 0.55);
+  background: rgba(255, 211, 106, 0.07);
+}
+
+.epicenterRow b {
+  font-size: 0.95em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--t-gold);
+}
+
+.epicenterAddr {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
+  color: var(--t-muted);
+}
+
 .embedded .scoreBox {
   padding: 0.5em 0.8em 0.55em;
 }
@@ -53,8 +84,16 @@
 }
 
 .embedded .findings li {
-  padding: 0.2em 0.6em;
-  font-size: 0.86em;
+  padding: 0.12em 0.6em;
+  font-size: 0.82em;
+}
+
+.embedded .epicenterRow {
+  padding: 0.3em 0.6em;
+}
+
+.embedded .entityName {
+  font-size: 1.2em;
 }
 
 .embedded .leftCol {
@@ -357,6 +396,37 @@
   font-family: var(--font-mono);
   font-size: 0.72em;
   letter-spacing: 0.12em;
+  color: var(--t-muted);
+}
+
+.epicenterRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.15em 0.8em;
+  padding: 0.45em 0.7em;
+  border: 1px dashed var(--t-border);
+  border-radius: 4px;
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.epicenterRow[data-live] {
+  border: 1px solid rgba(255, 211, 106, 0.55);
+  background: rgba(255, 211, 106, 0.07);
+}
+
+.epicenterRow b {
+  font-size: 0.95em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--t-gold);
+}
+
+.epicenterAddr {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
   color: var(--t-muted);
 }
 

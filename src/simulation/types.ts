@@ -21,6 +21,7 @@ export interface SimNode {
   role: Role;
   num: number;
   region: RegionId;
+  addr: string; // illustrative, stable per node
   // base + current position, normalized 0..1 inside the stage
   bx: number;
   by: number;
@@ -171,6 +172,7 @@ export interface Snapshot {
   topologyVersion: number;
   selection: Selection | null;
   epicenterLabel: string | null;
+  epicenterAddr: string | null;
   paused: boolean;
 }
 

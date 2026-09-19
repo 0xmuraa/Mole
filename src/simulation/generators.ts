@@ -15,7 +15,9 @@ export function demoWalletId() {
   return `0x${hex(3)}…${hex(3)}`;
 }
 
-export const DEMO_ENTITY = "HX-042";
+// Obviously fictional target for the preview — not a real asset.
+export const DEMO_TARGET = { ticker: "$NEBULA", name: "Nebula Protocol" };
+export const DEMO_ENTITY = DEMO_TARGET.ticker;
 
 export function flowValue() {
   return `+${rand(0.6, 8.4).toFixed(1)}`;

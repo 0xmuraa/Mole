@@ -3,7 +3,7 @@
 import { memo, useEffect, useRef } from "react";
 import s from "./terminal.module.css";
 import { FINDINGS, PROCESS_STEPS } from "@/simulation/config";
-import { DEMO_ENTITY } from "@/simulation/generators";
+import { DEMO_TARGET } from "@/simulation/generators";
 import type { SeismicEngine } from "@/simulation/SeismicEngine";
 import type { AuditRow, ChartState, HistoryRow, LogRow, Metrics, RouteRow, Selection } from "@/simulation/types";
 
@@ -14,27 +14,37 @@ export const EntityDossier = memo(function EntityDossier({
   findingIndex,
   selection,
   sim,
+  epicenterLabel,
+  epicenterAddr,
   onClear,
 }: {
   metrics: Metrics;
   findingIndex: number;
   selection: Selection | null;
   sim: boolean;
+  epicenterLabel: string | null;
+  epicenterAddr: string | null;
   onClear: () => void;
 }) {
   return (
     <section className={`${s.panel} ${s.dossier}`}>
       <header className={s.panelHead}>
         <h3 className={s.panelTitle}>ENTITY DOSSIER</h3>
-        <span className={s.panelTag}>{sim ? "DEMO ENTITY" : "TRACKED ENTITY"}</span>
+        <span className={s.panelTag}>{sim ? "ILLUSTRATIVE TARGET" : "TRACKED TARGET"}</span>
       </header>
 
       <div className={s.entity}>
-        <span className={s.entityBadge}>HX</span>
+        <span className={s.entityBadge}>NB</span>
         <div>
-          <div className={s.entityName}>{DEMO_ENTITY}</div>
-          <div className={s.entitySub}>{sim ? "ILLUSTRATIVE TARGET" : "RH CHAIN TARGET"}</div>
+          <div className={s.entityName}>{DEMO_TARGET.ticker}</div>
+          <div className={s.entitySub}>{DEMO_TARGET.name}{sim ? " · DEMO" : ""}</div>
         </div>
+      </div>
+
+      <div className={s.epicenterRow} data-live={epicenterLabel ? "" : undefined}>
+        <span className={s.kicker}>EPICENTER</span>
+        <b>{epicenterLabel ?? "SCANNING…"}</b>
+        <span className={s.epicenterAddr}>{epicenterAddr ?? "awaiting convergence"}</span>
       </div>
 
       <div className={s.scoreBox} data-state={metrics.scoreState}>

@@ -119,7 +119,17 @@
   flex-wrap: wrap;
 }
 
+.ticker {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  margin-right: 0.6em;
+}
+
 .cardName {
+  display: flex;
+  align-items: baseline;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.03em;
