@@ -51,6 +51,23 @@ The flagship surface is a full-viewport seismic observatory at `/terminal`, desi
 - Rendering is split in two: the network and chart scroll are applied imperatively every frame (no React re-renders), while panels read an immutable snapshot a few times per second.
 - URL flags: `/terminal?speed=0.5|1|1.5|2` tunes intensity, `/terminal?recording=1` hides the AUTO/PAUSE control. `prefers-reduced-motion` disables migration and thins out packets and rings.
 
+## Recording the terminal
+
+```
+npm run record:terminal
+```
+
+`scripts/record-terminal.mjs` produces a master and a share video of `/terminal?recording=1` without screen capture or OBS:
+
+- It ensures a production server is running (builds and starts one on port 3100 if needed) and launches headless Chromium with a native 2× compositor surface: the 1920×1200 layout renders at 3840×2400.
+- Chromium's virtual time is paused and advanced by exactly 1/60 s per frame (`HeadlessExperimental.beginFrame`), so every frame is captured as a lossless PNG regardless of render speed. No frames are dropped, duplicated or interpolated.
+- One FFmpeg process encodes both files from the same frames: `recordings/hypermole-terminal-master.mp4` (3840×2400, libx264 slow, CRF 13) and `recordings/hypermole-terminal-share.mp4` (1920×1200 Lanczos downscale, CRF 17). Both are 60 fps, yuv420p, faststart, no audio.
+- It ends with ffprobe metadata for both files plus inspection frames at 00:10 / 00:45 / 01:20.
+
+On a fresh machine run `npx playwright install chromium` once (the `playwright` devDependency ships the driver, not the browser). FFmpeg and ffprobe must be on `PATH`.
+
+Options: `--seconds 90 --scale 2 --port 3100 --out recordings --master-crf 13 --share-crf 17 --preset slow`. The 90 s run takes roughly 20 minutes (frame capture is the bottleneck, not encoding).
+
 ## Homepage
 
 The homepage reuses the same engine and `NetworkStage` component — the hero radar runs it in compact mode, and the terminal section embeds the real terminal. There is no second simulation.

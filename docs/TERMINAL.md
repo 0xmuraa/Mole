@@ -34,3 +34,7 @@ The centerpiece of the terminal. Four irregular, organically-placed regions of n
 `SeismicEngine` is a single class with one scheduler. Each timer (log, audit, verify, trace, flow, wake, minor tremor, tremor, convergence, migration, dormancy) re-rolls its next firing inside a min/max range. Events mutate shared state together — e.g. a convergence sequence creates converging routes, streams packets into the target, leans source nodes toward it, steps the convergence metric up, promotes the target to epicenter, spikes the chart, and writes log, audit and tremor-history rows.
 
 Output is two-channel: per-frame listeners (network stage, chart scroll) mutate the DOM directly, while React panels subscribe to an immutable snapshot via `useSyncExternalStore`. Simulation time is sub-stepped in 50ms slices so it stays on the wall clock when frames drop during screen recording.
+
+## Recording
+
+`npm run record:terminal` renders `/terminal?recording=1` frame by frame in headless Chromium (virtual time stepped at exactly 1/60 s, native 2× surface, lossless PNG frames) and encodes a 3840×2400 master and a 1920×1200 share MP4 at a true 60 fps. See the README for options and output paths.
