@@ -1,0 +1,5 @@
+recordings/
+.next/
+node_modules/
+*.mp4
+*.log
