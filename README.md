@@ -78,6 +78,15 @@ npm run record            # or double-click record-hypermole.bat
 
 Options: `--step 2 --ramp 1.5 --scroll <seconds> (time-locked instead of pixel-locked) --hold 2 --layout 1920 --width 2560 --height 1440 --encoder auto|nvenc|x264 --cq 16 --url ... --out ... --ffmpeg C:\path\ffmpeg.exe`. `--layout` is the CSS viewport width; 1920 reproduces the desktop layout you see on a 1080p monitor, rendered at 4/3 scale for extra sharpness. The script prints ffprobe metadata and writes preview stills next to the video.
 
+## Adding zoom events (`npm run zoom`)
+
+```
+npm run zoom                                              # → output/hypermole-edited-zoom.mp4
+npm run zoom -- --out output/hypermole-edited-zoom-v2.mp4 # explicit name
+```
+
+`scripts/zoom-video.mjs` applies the zoom events in `zooms.json` to the recorded video with FFmpeg and writes a NEW file; the source is never modified and an existing output is never overwritten (a `-v2`, `-v3` … suffix is added). Each event is `{ start, zoomIn, hold, zoomOut, zoom, x, y }`: seconds for the ease-in, the hold and the ease-out, the magnification, and the focus point as a fraction of the frame. Zooms use a smoothstep ease evaluated per frame, return fully to the untouched full frame between events, and keep the source resolution, frame rate, frame count and timing. `--mode anchor` (default) keeps the focus point fixed on screen while the picture grows around it; `--mode center` pans the focus point to the middle. Stills at full magnification are written next to the output.
+
 ## Homepage
 
 The homepage reuses the same engine and `NetworkStage` component — the hero radar runs it in compact mode, and the terminal section embeds the real terminal. There is no second simulation.

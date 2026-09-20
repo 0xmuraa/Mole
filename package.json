@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "record:terminal": "node scripts/record-terminal.mjs",
-    "record": "node scripts/record-site.mjs"
+    "record": "node scripts/record-site.mjs",
+    "zoom": "node scripts/zoom-video.mjs"
   },
   "dependencies": {
     "next": "16.3.5",
