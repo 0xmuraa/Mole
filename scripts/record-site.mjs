@@ -29,7 +29,7 @@
  * to get a genuine 2560x1440 @ 60 fps capture here, and it is also sharper.
  */
 import { spawn, spawnSync, execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
+import { mkdirSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
