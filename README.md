@@ -68,6 +68,16 @@ On a fresh machine run `npx playwright install chromium` once (the `playwright` 
 
 Options: `--seconds 90 --scale 2 --port 3100 --out recordings --master-crf 13 --share-crf 17 --preset slow`. The 90 s run takes roughly 20 minutes (frame capture is the bottleneck, not encoding).
 
+## Recording the website (scroll video for Recordly)
+
+```
+npm run record            # or double-click record-hypermole.bat
+```
+
+`scripts/record-site.mjs` records https://hypermole.dev/ as `output/hypermole-scroll-1440p60.mp4`: 2560×1440, 60 fps, H.264 (h264_nvenc on an NVIDIA GPU, libx264 otherwise), yuv420p, faststart, no audio. It opens the live site in a clean headless Chromium surface (no browser UI, taskbar or cursor), waits for fonts, images and 4 s of animation, then holds 2 s at the top, scrolls once from the very top to the very bottom with a requestAnimationFrame driver at an exact 2 device pixels per frame (about 45 s for the current page height, with 1.5 s ease ramps), and holds 2 s at the bottom. Frames are rendered on a paused virtual clock advanced 1/60 s at a time, so the result has no dropped or duplicated frames. No zoom effects are applied; add those in Recordly.
+
+Options: `--step 2 --ramp 1.5 --scroll <seconds> (time-locked instead of pixel-locked) --hold 2 --layout 1920 --width 2560 --height 1440 --encoder auto|nvenc|x264 --cq 16 --url ... --out ... --ffmpeg C:\path\ffmpeg.exe`. `--layout` is the CSS viewport width; 1920 reproduces the desktop layout you see on a 1080p monitor, rendered at 4/3 scale for extra sharpness. The script prints ffprobe metadata and writes preview stills next to the video.
+
 ## Homepage
 
 The homepage reuses the same engine and `NetworkStage` component — the hero radar runs it in compact mode, and the terminal section embeds the real terminal. There is no second simulation.

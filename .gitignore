@@ -50,3 +50,6 @@ next-env.d.ts
 
 # Terminal recordings (npm run record:terminal)
 recordings/
+
+# Website scroll recordings (npm run record)
+output/
