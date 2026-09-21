@@ -1,4 +1,5 @@
 import PageBackdrop from "@/components/PageBackdrop";
+import TokenBar from "@/components/TokenBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FlowTicker from "@/components/FlowTicker";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <PageBackdrop />
+      <TokenBar />
       <Navbar />
       <main>
         <Hero />

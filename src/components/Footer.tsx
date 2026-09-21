@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./Footer.module.css";
-import { navLinks, socials, site } from "@/config/project";
+import CopyButton from "./CopyButton";
+import { navLinks, socials, site, token, isTokenLive, shortAddress } from "@/config/project";
 
 export default function Footer() {
   return (
@@ -51,7 +52,21 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span className={styles.bottomLine}>MOVEMENT STARTS BELOW THE SURFACE.</span>
-          <span className={styles.stage}>EARLY DEVELOPMENT</span>
+          {isTokenLive && (
+            <span className={styles.ca}>
+              <span className={styles.caLabel}>CA</span>
+              <span className={styles.caShort} title={token.contractAddress}>
+                {shortAddress(token.contractAddress)}
+              </span>
+              <CopyButton
+                text={token.contractAddress}
+                label="COPY"
+                copiedLabel="COPIED ✓"
+                className={styles.caCopy}
+              />
+            </span>
+          )}
+          <span className={styles.stage}>{isTokenLive ? `${token.ticker} LIVE` : "EARLY DEVELOPMENT"}</span>
         </div>
       </div>
     </footer>

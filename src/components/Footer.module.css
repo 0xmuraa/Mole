@@ -94,3 +94,38 @@
   border-radius: 999px;
   padding: 5px 12px;
 }
+
+.ca {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.caLabel {
+  color: var(--muted);
+}
+
+.caShort {
+  color: var(--cream);
+}
+
+.caCopy {
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.caCopy:hover {
+  border-color: rgba(255, 184, 60, 0.5);
+  color: var(--gold);
+}

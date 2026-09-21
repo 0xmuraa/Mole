@@ -1,31 +1,40 @@
 import styles from "./TokenStatus.module.css";
-import { token } from "@/config/project";
+import CopyButton from "./CopyButton";
+import { token, isTokenLive } from "@/config/project";
 
 export default function TokenStatus() {
-  const isLive = token.tokenLive && token.contractAddress.length > 0;
-
   return (
-    <section className={styles.section}>
+    <section id="token" className={styles.section}>
       <div className="container">
         <div className={styles.panel}>
           <span className={styles.eyebrow}>HYPERMOLE TOKEN</span>
-          <h2 className={styles.headline}>{isLive ? "TOKEN LIVE" : "NOT LIVE YET"}</h2>
 
-          {isLive ? (
+          {isTokenLive ? (
             <>
-              <span className={styles.statusBadge}>
-                <span className={styles.statusDot} />
-                CONTRACT VERIFIED
+              <h2 className={styles.headline}>{token.ticker}</h2>
+              <span className={`${styles.statusBadge} ${styles.statusLive}`}>
+                <span className={`${styles.statusDot} ${styles.statusDotLive}`} />
+                {token.chainLabel}
               </span>
-              <p className={styles.sub}>{token.contractAddress}</p>
-              {token.buyUrl && (
-                <a href={token.buyUrl} target="_blank" rel="noopener noreferrer">
-                  BUY
-                </a>
-              )}
+              <span className={styles.caLabel}>OFFICIAL CONTRACT ADDRESS</span>
+              <code className={styles.ca}>{token.contractAddress}</code>
+              <div className={styles.actions}>
+                <CopyButton
+                  text={token.contractAddress}
+                  label="COPY CONTRACT"
+                  copiedLabel="COPIED ✓"
+                  className="btnPrimary"
+                />
+                {token.explorerUrl && (
+                  <a href={token.explorerUrl} target="_blank" rel="noopener noreferrer" className="btnSecondary">
+                    EXPLORER ↗
+                  </a>
+                )}
+              </div>
             </>
           ) : (
             <>
+              <h2 className={styles.headline}>NOT LIVE YET</h2>
               <span className={styles.statusBadge}>
                 <span className={styles.statusDot} />
                 NO CONTRACT DEPLOYED

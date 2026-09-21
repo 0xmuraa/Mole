@@ -53,3 +53,49 @@
   font-size: 0.95rem;
   line-height: 1.55;
 }
+
+.statusLive {
+  color: var(--amber);
+  border-color: rgba(255, 184, 60, 0.35);
+}
+
+.statusDotLive {
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(255, 184, 60, 0.9);
+}
+
+.caLabel {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+
+.ca {
+  display: block;
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid rgba(255, 184, 60, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  user-select: all;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.actions button {
+  cursor: pointer;
+}

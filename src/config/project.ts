@@ -5,17 +5,33 @@
 
 export type TokenConfig = {
   tokenLive: boolean;
+  ticker: string;
+  chainLabel: string;
+  /** Full official contract address. The ONLY place it is written. */
   contractAddress: string;
   buyUrl: string;
   chartUrl: string;
+  /** Verified block explorer URL for the contract. Empty = explorer button hidden. */
+  explorerUrl: string;
 };
 
 export const token: TokenConfig = {
-  tokenLive: false,
-  contractAddress: "",
+  tokenLive: true,
+  ticker: "$HYPERMOLE",
+  chainLabel: "ROBINHOOD CHAIN",
+  contractAddress: "0xd260c266a4646763e89d059112b3b239815954a6",
   buyUrl: "",
   chartUrl: "",
+  explorerUrl: "",
 };
+
+/** `0xd260...54a6` style shortening, derived from the full address. */
+export function shortAddress(address: string, head = 6, tail = 4): string {
+  if (address.length <= head + tail + 1) return address;
+  return `${address.slice(0, head)}...${address.slice(-tail)}`;
+}
+
+export const isTokenLive = token.tokenLive && token.contractAddress.length > 0;
 
 export type SocialLinks = {
   github: string;
