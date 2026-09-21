@@ -5,6 +5,7 @@
  *   npm run record                       # https://hypermole.dev/, 2560x1440, 60 fps, ~60 s
  *   npm run record -- --scroll 56        # lock the scroll phase to 56 s instead of a pixel-locked speed
  *   npm run record -- --step 1           # half speed (1 device px per frame)
+ *   npm run record -- --url http://localhost:3100/cover --static 16 --out output/hypermole-cover-1440p60.mp4
  *   record-hypermole.bat                 # same thing, double-clickable
  *
  * Output: output/hypermole-scroll-1440p60.mp4 (H.264, yuv420p, faststart, no audio)
@@ -52,6 +53,7 @@ const HOLD_BOTTOM = Number(opt("hold-bottom", opt("hold", 2)));
 const SCROLL_S = Number(opt("scroll", 0)); // 0 = derive from --step (pixel-locked speed)
 const STEP = Number(opt("step", 2)); // device pixels per frame when pixel-locked
 const RAMP_S = Number(opt("ramp", 1.5)); // ease-in / ease-out length in seconds
+const STATIC_S = Number(opt("static", 0)); // >0: no scrolling, just record this many seconds (e.g. /cover)
 const WARMUP_S = Number(opt("warmup", 4)); // animations run this long before the first recorded frame
 const OUT = resolve(opt("out", join(ROOT, "output", "hypermole-scroll-1440p60.mp4")));
 const ENCODER = opt("encoder", "auto"); // auto | nvenc | x264
@@ -188,39 +190,44 @@ async function main() {
   const rampFrames = Math.round(RAMP_S * FPS);
   let stepDev = STEP;
   let scrollFrames;
-  if (SCROLL_S) {
+  if (STATIC_S) {
+    scrollFrames = 0;
+    stepDev = 0;
+  } else if (SCROLL_S) {
     scrollFrames = Math.round(SCROLL_S * FPS);
     stepDev = distDev / (scrollFrames - rampFrames);
   } else {
     scrollFrames = Math.round(distDev / stepDev) + rampFrames;
   }
-  // velocity profile in device px per frame; positions integrated then normalised so the last frame lands exactly on the bottom
-  const smooth = (x) => x * x * (3 - 2 * x);
-  const vel = (f) => (f < rampFrames ? stepDev * smooth(f / rampFrames) : f >= scrollFrames - rampFrames ? stepDev * smooth((scrollFrames - f) / rampFrames) : stepDev);
-  const pos = new Array(scrollFrames + 1).fill(0);
-  for (let f = 0; f < scrollFrames; f++) pos[f + 1] = pos[f] + vel(f);
-  const k = distDev / pos[scrollFrames];
-  const positionsCss = pos.map((v) => Math.round(v * k) / dsf);
-  await page.evaluate(
-    ({ holdFrames, positions, interval }) => {
-      const t0 = performance.now();
-      const last = positions.length - 1;
-      const tick = (t) => {
-        const f = Math.round((t - t0) / interval) - holdFrames; // frame index inside the scroll phase
-        const i = Math.min(Math.max(f, 0), last);
-        window.scrollTo(0, positions[i]);
-        window.__rec = { i, y: positions[i], target: positions[last] };
+  if (!STATIC_S) {
+    // velocity profile in device px per frame; positions integrated then normalised so the last frame lands exactly on the bottom
+    const smooth = (x) => x * x * (3 - 2 * x);
+    const vel = (f) => (f < rampFrames ? stepDev * smooth(f / rampFrames) : f >= scrollFrames - rampFrames ? stepDev * smooth((scrollFrames - f) / rampFrames) : stepDev);
+    const pos = new Array(scrollFrames + 1).fill(0);
+    for (let f = 0; f < scrollFrames; f++) pos[f + 1] = pos[f] + vel(f);
+    const k = distDev / pos[scrollFrames];
+    const positionsCss = pos.map((v) => Math.round(v * k) / dsf);
+    await page.evaluate(
+      ({ holdFrames, positions, interval }) => {
+        const t0 = performance.now();
+        const last = positions.length - 1;
+        const tick = (t) => {
+          const f = Math.round((t - t0) / interval) - holdFrames; // frame index inside the scroll phase
+          const i = Math.min(Math.max(f, 0), last);
+          window.scrollTo(0, positions[i]);
+          window.__rec = { i, y: positions[i], target: positions[last] };
+          requestAnimationFrame(tick);
+        };
         requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    },
-    { holdFrames: Math.round(HOLD_TOP * FPS), positions: positionsCss, interval }
-  );
+      },
+      { holdFrames: Math.round(HOLD_TOP * FPS), positions: positionsCss, interval }
+    );
+  }
   const scrollS = scrollFrames / FPS;
   log(`scroll range 0 → ${maxScroll}px css (${distDev} device px) · ${stepDev.toFixed(3)} device px/frame${SCROLL_S ? " (time-locked)" : " (pixel-locked)"} · ${RAMP_S}s ramps · scroll ${scrollS.toFixed(1)}s · holds ${HOLD_TOP}s / ${HOLD_BOTTOM}s`);
 
   // ---- 5. record
-  const total = Math.round(HOLD_TOP * FPS) + scrollFrames + Math.round(HOLD_BOTTOM * FPS);
+  const total = STATIC_S ? Math.round(STATIC_S * FPS) : Math.round(HOLD_TOP * FPS) + scrollFrames + Math.round(HOLD_BOTTOM * FPS);
   log(`total ${total} frames = ${(total / FPS).toFixed(1)}s`);
   const ffArgs = ["-y", "-hide_banner", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-i", "pipe:0"];
   let ff = null;
@@ -257,7 +264,7 @@ async function main() {
       log(`${Math.round(done * 100)}% · ${rate.toFixed(1)} frames/s · eta ${Math.round((total - i) / rate)}s`);
     }
   }
-  const end = await page.evaluate(() => ({ ...window.__rec, scrollY, max: document.documentElement.scrollHeight - innerHeight }));
+  const end = await page.evaluate(() => ({ i: 0, ...window.__rec, scrollY, max: document.documentElement.scrollHeight - innerHeight }));
   ff.stdin.end();
   await ffDone;
   await browser.close();

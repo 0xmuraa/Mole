@@ -51,6 +51,16 @@ The flagship surface is a full-viewport seismic observatory at `/terminal`, desi
 - Rendering is split in two: the network and chart scroll are applied imperatively every frame (no React re-renders), while panels read an immutable snapshot a few times per second.
 - URL flags: `/terminal?speed=0.5|1|1.5|2` tunes intensity, `/terminal?recording=1` hides the AUTO/PAUSE control. `prefers-reduced-motion` disables migration and thins out packets and rings.
 
+## Token cover (`/cover`)
+
+A single full-screen promotional composition for X posts and videos: the pixel mole in the middle of an animated seismic / data field (amber orbits, cyan trails, particles, seismic rings, an occasional amber pulse), the HYPERMOLE name top-left with a small ROBINHOOD CHAIN label, and the slogan MOVEMENT STARTS BELOW. at the bottom. Nothing else: no metrics, no panels, no contract address, no buy button. All motion is CSS and starts immediately, so it records deterministically:
+
+```
+npm run record -- --url http://localhost:3100/cover --static 16 --out output/hypermole-cover-1440p60.mp4
+```
+
+(`--static N` records N seconds without scrolling.) `/terminal` stays the full observatory.
+
 ## Recording the terminal
 
 ```

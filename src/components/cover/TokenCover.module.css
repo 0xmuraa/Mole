@@ -1,0 +1,369 @@
+/* ============================================================
+   HYPERMOLE token hero screen
+   black #050505 · amber #ffb83c · cyan #38d7ed
+   All motion is CSS; sizes are in vmin so 16:9 and 16:10 both fill.
+   ============================================================ */
+
+.cover {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #050505;
+  color: var(--cream);
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  user-select: none;
+}
+
+/* ---------- background ---------- */
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(243, 241, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 241, 235, 0.045) 1px, transparent 1px);
+  background-size: 6.5vmin 6.5vmin;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 100%);
+}
+
+.glow {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(9vmin);
+  pointer-events: none;
+}
+
+.glowAmber {
+  width: 96vmin;
+  height: 96vmin;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 184, 60, 0.2) 0%, rgba(255, 184, 60, 0.06) 38%, rgba(255, 184, 60, 0) 70%);
+  animation: driftAmber 14s ease-in-out infinite;
+}
+
+.glowCyan {
+  width: 80vmin;
+  height: 80vmin;
+  left: 8%;
+  top: -18%;
+  background: radial-gradient(circle, rgba(56, 215, 237, 0.22) 0%, rgba(56, 215, 237, 0.06) 40%, rgba(56, 215, 237, 0) 70%);
+  animation: driftCyan 19s ease-in-out infinite;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 78% 74% at 50% 50%, rgba(5, 5, 5, 0) 45%, rgba(5, 5, 5, 0.55) 80%, rgba(5, 5, 5, 0.92) 100%);
+}
+
+@keyframes driftAmber {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  50% { transform: translate(-48%, -52%) scale(1.06); opacity: 1; }
+}
+
+@keyframes driftCyan {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4vmin, 3vmin); }
+}
+
+/* ---------- name (top-left) ---------- */
+
+.brand {
+  position: absolute;
+  z-index: 4;
+  top: 5.2vmin;
+  left: 5.6vmin;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3vmin;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 6.4vmin;
+  line-height: 0.95;
+  letter-spacing: 0.035em;
+  color: var(--cream);
+  text-shadow: 0 0 3vmin rgba(255, 184, 60, 0.18);
+}
+
+.chain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9vmin;
+  font-size: 1.55vmin;
+  letter-spacing: 0.32em;
+  color: var(--amber);
+}
+
+.chainDot {
+  width: 0.9vmin;
+  height: 0.9vmin;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 1.2vmin rgba(255, 184, 60, 0.9);
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ---------- centre stage ---------- */
+
+.stage {
+  position: relative;
+  z-index: 2;
+  width: 84vmin;
+  height: 84vmin;
+  display: grid;
+  place-items: center;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.core {
+  transform-origin: 500px 500px;
+  animation: breathe 4.2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0.8; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+
+/* seismic rings */
+.ring {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 2.8;
+  transform-origin: 500px 500px;
+  opacity: 0;
+  animation: seismic 6.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.ring1 { animation-delay: 0s; }
+.ring2 { animation-delay: 2.2s; }
+.ring3 { animation-delay: 4.4s; }
+
+@keyframes seismic {
+  0% { transform: scale(0.42); opacity: 0; }
+  8% { opacity: 0.85; }
+  100% { transform: scale(1.62); opacity: 0; }
+}
+
+/* occasional amber pulse: a single strong flash every 7.5 s */
+.pulse {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 5;
+  transform-origin: 500px 500px;
+  opacity: 0;
+  animation: pulse 7.5s ease-out infinite;
+  animation-delay: 1.4s;
+}
+
+@keyframes pulse {
+  0%, 80% { transform: scale(0.5); opacity: 0; }
+  82% { opacity: 0.95; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* orbital lines */
+.orbits {
+  transform-origin: 500px 500px;
+  animation: orbitShift 11s ease-in-out infinite;
+}
+
+.orbit ellipse {
+  fill: none;
+  stroke: var(--amber);
+  stroke-opacity: 0.6;
+  stroke-width: 1.6;
+}
+
+.orbit {
+  transform-origin: 500px 500px;
+}
+
+.orbitA { animation: spin 46s linear infinite; }
+.orbitB { animation: spinReverse 62s linear infinite; }
+.orbitC ellipse { stroke-opacity: 0.32; stroke-dasharray: 2 10; stroke-linecap: round; }
+.orbitC { animation: spin 90s linear infinite; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* the whole orbit group tilts a little now and then */
+@keyframes orbitShift {
+  0%, 74%, 100% { transform: rotate(0deg) scale(1); }
+  82% { transform: rotate(7deg) scale(1.025); }
+  90% { transform: rotate(-3deg) scale(0.995); }
+}
+
+/* rotating partial arcs */
+.arc {
+  transform-origin: 500px 500px;
+}
+.arc circle {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.arcA { animation: spin 28s linear infinite; }
+.arcA circle { stroke: var(--amber); stroke-opacity: 0.75; stroke-dasharray: 22 30 8 40; }
+.arcB { animation: spinReverse 40s linear infinite; }
+.arcB circle { stroke: var(--cyan); stroke-opacity: 0.45; stroke-dasharray: 14 46 4 36; stroke-width: 2.2; }
+
+/* cyan comets */
+.trailSpin { transform-origin: 500px 500px; }
+.trailA { animation: spin 9s linear infinite; }
+.trailB { animation: spinReverse 13s linear infinite; animation-delay: -4s; }
+.trailC { animation: spin 7s linear infinite; animation-delay: -2.5s; }
+
+.trail {
+  fill: none;
+  stroke-linecap: round;
+}
+.trailTail {
+  stroke: var(--cyan);
+  stroke-opacity: 0.35;
+  stroke-width: 3.4;
+  stroke-dasharray: 16 84;
+}
+.trailHead {
+  stroke: #dffbff;
+  stroke-width: 3.8;
+  stroke-dasharray: 3.5 96.5;
+  stroke-dashoffset: -12.5;
+  filter: drop-shadow(0 0 6px rgba(56, 215, 237, 0.9));
+}
+
+/* particle bands */
+.band { transform-origin: 500px 500px; }
+.bandA { animation: spin 21s linear infinite; }
+.bandB { animation: spinReverse 27s linear infinite; }
+.bandC { animation: spin 35s linear infinite; }
+.bandD { animation: spinReverse 44s linear infinite; }
+.sparks { animation: spin 5.5s linear infinite; }
+
+.dotCyan {
+  fill: var(--cyan);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(56, 215, 237, 0.8));
+  animation: twinkle 3.1s ease-in-out infinite;
+}
+.dotAmber {
+  fill: var(--gold);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px rgba(255, 184, 60, 0.8));
+  animation: twinkle 2.6s ease-in-out infinite;
+  animation-delay: -1.3s;
+}
+.dotSpark {
+  fill: #ffffff;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 3px rgba(56, 215, 237, 1));
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* halo directly behind the mole + the mole itself */
+.halo {
+  position: absolute;
+  width: 50vmin;
+  height: 50vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 184, 60, 0.34) 0%, rgba(255, 184, 60, 0.1) 45%, rgba(255, 184, 60, 0) 70%);
+  filter: blur(2vmin);
+  animation: haloBreathe 4.2s ease-in-out infinite;
+}
+
+@keyframes haloBreathe {
+  0%, 100% { transform: scale(0.96); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+.mole {
+  position: relative;
+  width: 50vmin;
+  height: 50vmin;
+  filter:
+    drop-shadow(0 2.4vmin 3vmin rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 2.6vmin rgba(255, 184, 60, 0.28));
+  animation: hover 5.6s ease-in-out infinite;
+}
+
+@keyframes hover {
+  0%, 100% { transform: translateY(0.6vmin); }
+  50% { transform: translateY(-0.6vmin); }
+}
+
+/* ---------- slogan (bottom) ---------- */
+
+.bottom {
+  position: absolute;
+  z-index: 4;
+  bottom: 5.4vmin;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4vmin;
+}
+
+.slogan {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 4.9vmin;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  text-shadow: 0 0 3vmin rgba(56, 215, 237, 0.18);
+}
+
+.tag {
+  margin: 0;
+  font-size: 1.45vmin;
+  letter-spacing: 0.42em;
+  color: var(--muted);
+}
+
+/* narrow / portrait screens: stack a little tighter */
+@media (max-aspect-ratio: 4/5) {
+  .stage { width: 92vmin; height: 92vmin; }
+  .name { font-size: 8vmin; }
+  .slogan { font-size: 5.6vmin; }
+}
